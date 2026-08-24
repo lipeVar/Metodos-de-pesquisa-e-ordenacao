@@ -1,10 +1,8 @@
-package aula20_08;
-package Aula20_08
+package aula20_08.mvc;
 
 import java.util.List;
 import java.util.Random;
 import java.util.ArrayList;
-import java.util.Collections;
 
 class Processo implements Comparable<Processo> {
     int id;
@@ -90,7 +88,7 @@ class Util {
         Random gerador = new Random();
         
         for (int i = 0; i < quantidade; i++) {
-            lista.add(new Processo(gerador.nextInt(100,500), "gerando uma string " + gerador.nextInt(quantidade)));
+            lista.add(new Processo(100 + gerador.nextInt(400), "gerando uma string " + gerador.nextInt(quantidade)));
         }
     }
 }

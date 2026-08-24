@@ -3,9 +3,9 @@ package aula20_08.app.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import app.model.ProcessoService;
-import app.model.Processo;
-import app.view.ProcessoView;
+import aula20_08.app.model.ProcessoService;
+import aula20_08.app.model.Processo;
+import aula20_08.app.view.ProcessoView;
 
 public class ProcessoController {
 
