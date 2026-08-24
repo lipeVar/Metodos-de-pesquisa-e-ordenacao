@@ -1,4 +1,4 @@
-package aula20_08.app.model
+package aula20_08.app.model;
 
 import java.util.List;
 import java.util.Random;
