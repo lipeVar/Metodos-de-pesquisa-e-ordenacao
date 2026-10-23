@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organizador de Algoritmos (MVC)</title>
+    <!-- Framework CSS Minimalista (Modo Escuro) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css">
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background-color: #1e1e1e;
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid #333;
+        }
+        .resultados-box {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 6px solid #007BFF;
+            margin-top: 20px;
+        }
+        button {
+            width: 100%;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>📊 Analisador de Algoritmos de Ordenação</h1>
+    <p>Análise de desempenho de estruturas de dados utilizando arquitetura MVC em Python (Flask).</p>
+    
+    <div class="grid-container">
+        <!-- FORMULÁRIO 1: CARREGAR ARQUIVO -->
+        <div class="card">
+            <h3>📂 Opção 1: Enviar Arquivo .txt</h3>
+            <form method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="tipo_entrada" value="arquivo">
+                
+                <label for="arquivo">Selecione o arquivo numérico:</label>
+                <input type="file" id="arquivo" name="arquivo" accept=".txt" required>
+                
+                <label for="algoritmo_arq">Escolha o Algoritmo:</label>
+                <select id="algoritmo_arq" name="algoritmo">
+                    <option value="bolha">Bolha</option>
+                    <option value="selecao">Seleção</option>
+                    <option value="insercao">Inserção</option>
+                    <option value="merge">Merge</option>
+                </select>
+                
+                <button type="submit">Ordenar Arquivo</button>
+            </form>
+        </div>
+
+        <!-- FORMULÁRIO 2: GERADOR AUTOMÁTICO -->
+        <div class="card">
+            <h3>⚡ Opção 2: Gerador de Testes</h3>
+            <form method="POST">
+                <input type="hidden" name="tipo_entrada" value="gerador">
+                
+                <label for="tamanho_gerador">Quantidade de elementos aleatórios:</label>
+                <select id="tamanho_gerador" name="tamanho_gerador">
+                    <option value="100">100 números</option>
+                    <option value="500">500 números</option>
+                    <option value="1000">1.000 números</option>
+                    <option value="5000">5.000 números</option>
+                    <option value="10000">10.000 números</option>
+                </select>
+                
+                <label for="algoritmo_ger">Escolha o Algoritmo:</label>
+                <select id="algoritmo_ger" name="algoritmo">
+                    <option value="bolha">Bolha</option>
+                    <option value="selecao">Seleção</option>
+                    <option value="insercao">Inserção</option>
+                    <option value="merge">Merge</option>
+                </select>
+                
+                <button type="submit" class="btn-primary">Gerar e Executar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- EXIBIÇÃO DOS RESULTADOS (VIEW CONDICIONAL) -->
+    {% if resultados %}
+        <hr>
+        <h2>✨ Concluído: {{ resultados.origem }}</h2>
+        
+        <div class="resultados-box">
+            <p><strong>🧠 Método Utilizado:</strong> {{ resultados.algoritmo_nome }}</p>
+            <ul>
+                <li><strong>⏱️ Tempo de Execução:</strong> <span style="color: #4CAF50; font-weight: bold; font-size: 1.1em;">{{ resultados.tempo }}</span> segundos</li>
+                <li><strong>🔄 Total de Movimentações:</strong> {{ "{:,}".format(resultados.trocas).replace(',', '.') }}</li>
+                <li><strong>🧐 Total de Comparações:</strong> {{ "{:,}".format(resultados.comparacoes).replace(',', '.') }}</li>
+            </ul>
+        </div>
+        
+        <h3>📋 Prévia (Primeiros 15 itens):</h3>
+        <pre style="background: #111; padding: 15px; border-radius: 8px;"><code>{{ resultados.previa }}...</code></pre>
+    {% endif %}
+
+</body>
+</html>
